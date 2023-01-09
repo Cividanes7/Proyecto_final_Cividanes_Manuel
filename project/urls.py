@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Cotizador.views import NeumaticoDetalle
+from Cotizador.views import NeumaticoList, NeumaticoCrear, NeumaticoBorrar, NeumaticoActualizar, NeumaticoDetalle
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('panel-neumatico/<int:pk>/detalle', NeumaticoDetalle.as_view()),
+    path('panel-neumatico/<int:pk>/detalle', NeumaticoDetalle.as_view(), name='neumatico_detalle'),
+    path('panel-neumatico/', NeumaticoList.as_view(), name='neumatico_list'),
+    path('panel-neumatico/crear', NeumaticoCrear.as_view()),
+    path('panel-neumatico/<int:pk>/borrar', NeumaticoBorrar.as_view()),
+    path('panel-neumatico/<int:pk>/actualizar', NeumaticoActualizar.as_view()),
 ]
