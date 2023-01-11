@@ -16,13 +16,34 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Cotizador.views import NeumaticoList, NeumaticoCrear, NeumaticoBorrar, NeumaticoActualizar, NeumaticoDetalle
-
+from Functions.views import (index, PostDetalle, PostListar, 
+                               PostCrear, PostBorrar, PostActualizar,
+                               UserSignUp, UserLogin, UserLogout, 
+                               AvatarActualizar, UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle)
+from django.contrib.admin.views.decorators import staff_member_required
+from Functions.views import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('panel-neumatico/<int:pk>/detalle', NeumaticoDetalle.as_view(), name='neumatico_detalle'),
-    path('panel-neumatico/', NeumaticoList.as_view(), name='neumatico_list'),
+    path('panel-neumatico/<int:pk>/detalle', NeumaticoDetalle.as_view()),
+    path('panel-neumatico/', NeumaticoList.as_view()),
     path('panel-neumatico/crear', NeumaticoCrear.as_view()),
     path('panel-neumatico/<int:pk>/borrar', NeumaticoBorrar.as_view()),
     path('panel-neumatico/<int:pk>/actualizar', NeumaticoActualizar.as_view()),
+    path('success_updated_message/',TemplateView.as_view(template_name="ejemplo/success_updated_message.html")),
+    path('Functions/', index, name="Functions-index"),
+    path('Functions/<int:pk>/detalle/', PostDetalle.as_view(), name="Functions-detalle"),
+    path('Functions/listar/', PostListar.as_view(), name="Functions-listar"),
+    path('Functions/crear/', staff_member_required(PostCrear.as_view()), name="Functions-crear"),
+    path('Functions/<int:pk>/borrar/', staff_member_required(PostBorrar.as_view()), name="Functions-borrar"),
+    path('Functions/<int:pk>/actualizar/', staff_member_required(PostActualizar.as_view()), name="Functions-actualizar"),
+    path('Functions/signup/', UserSignUp.as_view(), name ="Functions-signup"),
+    path('Functions/login/', UserLogin.as_view(), name= "Functions-login"),
+    path('Functions/logout/', UserLogout.as_view(), name="Functions-logout"),
+    path('Functions/avatars/<int:pk>/actualizar/', AvatarActualizar.as_view(), name="Functions-avatars-actualizar"),
+    path('Functions/users/<int:pk>/actualizar/', UserActualizar.as_view(), name="Functions-users-actualizar"),
+    path('Functions/mensajes/crear/', MensajeCrear.as_view(), name="Functions-mensajes-crear"),
+    path('Functions/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="Functions-mensajes-detalle"),
+    path('Functions/mensajes/listar/', MensajeListar.as_view(), name="Functions-mensajes-listar"),
 ]
+
