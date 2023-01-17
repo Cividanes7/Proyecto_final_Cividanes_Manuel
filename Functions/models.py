@@ -18,3 +18,7 @@ class Mensaje(models.Model):
     nombre = models.CharField(max_length=100)
     texto = models.TextField(max_length=3000)
     enviado_el = models.DateField(auto_now_add=True)
+
+class About(models.Model):
+    titulo = models.CharField(max_length=100)
+    

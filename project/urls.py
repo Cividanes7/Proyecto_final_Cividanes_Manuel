@@ -21,7 +21,7 @@ from Cotizador.views import NeumaticoList, NeumaticoCrear, NeumaticoBorrar, Neum
 from Functions.views import (index, PostDetalle, PostListar, 
                                PostCrear, PostBorrar, PostActualizar,
                                UserSignUp, UserLogin, UserLogout, 
-                               AvatarActualizar, UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle)
+                               AvatarActualizar, UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle, AboutView)
 from django.contrib.admin.views.decorators import staff_member_required
 from Functions.views import TemplateView
 
@@ -47,6 +47,7 @@ urlpatterns = [
     path('Functions/mensajes/crear/', MensajeCrear.as_view(), name="Functions-mensajes-crear"),
     path('Functions/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="Functions-mensajes-detalle"),
     path('Functions/mensajes/listar/', MensajeListar.as_view(), name="Functions-mensajes-listar"),
+    path('Functions/about/', AboutView.as_view(), name="Functions-about"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
